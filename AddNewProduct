@@ -1,0 +1,29 @@
+import requests
+
+URL = "https://api.sheety.co/f8724e1153f9bdc8a257690deeb690bc/untitledSpreadsheet/price"
+check = True
+
+print("Greetings, this is the Amazon Price Checker. Be notified when prices are within an acceptable range.\n")
+while check:
+  url = input("What is the URL of the Amazon product you want to keep an eye on?\n")
+  price = input("\nWhat is the price threshold you'd want to be notified on for this item?\n")
+  email_1 = input("\nPlease enter an email address you'd like to be notified at:\n")
+  email_2 = input("\nPlease confirm the email:\n")
+  if email_1 == email_2 and url != "" and price != "":
+    num = ""
+    for c in price:
+      if c.isdigit():
+        num = num + c
+    sheet_inputs = {
+            "price": {
+                "price": int(num),
+                "email": email_1,
+                "url": url
+            }
+        }
+    
+    sheet = requests.post(URL, json=sheet_inputs)
+    print("All done. We'll email you if we ever see a good deal!")
+    check = False
+  else:
+    print("\nI'm sorry, either you left some fields blank or your emails didn't match. Please try again.\n")
