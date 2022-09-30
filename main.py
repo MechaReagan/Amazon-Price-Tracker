@@ -1,9 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
 import smtplib
+import os
 
-my_email = "james.standlee.testing@gmail.com"
-my_password = "dgnyflwwvmtiaard"
+my_email = os.environ.get("email")
+my_password = os.environ.get("password")
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
     "Accept-Language": "en-US,en;q=0.9"
